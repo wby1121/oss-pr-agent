@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oss-pr-agent"
+version = "0.1.0"
+description = "Dry-run MVP for scanning GitHub repositories and preparing AI-assisted contribution bundles."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Codex" }
+]
+dependencies = []
+
+[project.scripts]
+oss-pr-agent = "oss_pr_agent.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"oss_pr_agent" = ["web_static/*"]

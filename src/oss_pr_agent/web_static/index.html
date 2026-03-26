@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSS PR Agent</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <div class="toolbar">
+            <div class="toggle-group">
+              <span class="toggle-label" data-i18n="toolbar.language">Language</span>
+              <div class="segmented" id="language-toggle">
+                <button type="button" class="segmented-btn" data-lang="en">EN</button>
+                <button type="button" class="segmented-btn" data-lang="zh">中文</button>
+                <button type="button" class="segmented-btn" data-lang="ja">日本語</button>
+                <button type="button" class="segmented-btn" data-lang="ko">한국어</button>
+              </div>
+            </div>
+            <div class="toggle-group">
+              <span class="toggle-label" data-i18n="toolbar.theme">Theme</span>
+              <div class="segmented" id="theme-toggle">
+                <button type="button" class="segmented-btn" data-theme="light" data-i18n="theme.light">Day</button>
+                <button type="button" class="segmented-btn" data-theme="dark" data-i18n="theme.dark">Night</button>
+              </div>
+            </div>
+          </div>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Open source contribution studio</p>
+          <h1 data-i18n="hero.title">Plan PRs from real project discussions, one confirmation step at a time.</h1>
+          <p class="lede" data-i18n="hero.lede">
+            Review repository signals, select a bug or feature request, shape the solution, edit Markdown drafts, and
+            prepare a submission branch without leaving the page.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-label" data-i18n="flow.title">Flow</div>
+          <ol>
+            <li data-i18n="flow.step1">Analyze target repo</li>
+            <li data-i18n="flow.step2">Confirm solution</li>
+            <li data-i18n="flow.step3">Edit PR and reply</li>
+            <li data-i18n="flow.step4">Prepare branch</li>
+          </ol>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="panel step-panel active" id="step-1">
+          <div class="panel-header">
+            <span class="step-chip" data-i18n="steps.one">Step 1</span>
+            <h2 data-i18n="panel1.title">Input target address</h2>
+          </div>
+          <label class="field">
+            <span data-i18n="panel1.label">GitHub repository URL</span>
+            <div class="input-row">
+              <input id="repo-url" type="url" placeholder="https://github.com/owner/repo" />
+              <button id="analyze-btn" data-i18n="panel1.button">Analyze</button>
+            </div>
+          </label>
+          <p class="hint" data-i18n="panel1.hint">
+            This returns the project star count plus the most relevant bug reports and feature requests.
+          </p>
+          <div id="analysis-output" class="output-grid hidden"></div>
+        </section>
+
+        <section class="panel step-panel" id="step-2">
+          <div class="panel-header">
+            <span class="step-chip" data-i18n="steps.two">Step 2</span>
+            <h2 data-i18n="panel2.title">Confirm solution</h2>
+          </div>
+          <div id="solution-output" class="stack muted" data-empty-key="panel2.empty">Analyze a repository first.</div>
+          <label class="field">
+            <span data-i18n="panel2.label">Editable solution outline</span>
+            <textarea
+              id="solution-outline"
+              rows="8"
+              placeholder="- reproduce the issue&#10;- make the smallest fix&#10;- add tests"
+            ></textarea>
+          </label>
+          <button id="confirm-solution-btn" class="secondary" disabled data-i18n="panel2.button">Confirm this solution</button>
+        </section>
+
+        <section class="panel step-panel" id="step-3">
+          <div class="panel-header">
+            <span class="step-chip" data-i18n="steps.three">Step 3</span>
+            <h2 data-i18n="panel3.title">PR and comment reply</h2>
+          </div>
+          <div class="editor-grid">
+            <div class="editor-column">
+              <label class="field">
+                <span data-i18n="panel3.prTitle">PR title</span>
+                <input id="pr-title" type="text" />
+              </label>
+              <label class="field">
+                <span data-i18n="panel3.prBody">PR body (Markdown)</span>
+                <textarea id="pr-body" rows="12"></textarea>
+              </label>
+              <label class="field">
+                <span data-i18n="panel3.replyBody">Reply draft (Markdown)</span>
+                <textarea id="reply-body" rows="10"></textarea>
+              </label>
+              <button id="save-drafts-btn" class="secondary" disabled data-i18n="panel3.button">Confirm and preview drafts</button>
+            </div>
+            <div class="preview-column">
+              <div class="preview-card">
+                <div class="preview-header" data-i18n="panel3.previewPr">PR preview</div>
+                <div id="pr-preview" class="markdown-body"></div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-header" data-i18n="panel3.previewReply">Reply preview</div>
+                <div id="reply-preview" class="markdown-body"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel step-panel" id="step-4">
+          <div class="panel-header">
+            <span class="step-chip" data-i18n="steps.four">Step 4</span>
+            <h2 data-i18n="panel4.title">Submit branch and wait for confirmation</h2>
+          </div>
+          <div id="submission-output" class="stack muted" data-empty-key="panel4.empty">Confirm the drafts before preparing a branch.</div>
+          <button id="submit-branch-btn" disabled data-i18n="panel4.button">Prepare branch</button>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

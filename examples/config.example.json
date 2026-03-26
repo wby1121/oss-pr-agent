@@ -1,0 +1,15 @@
+{
+  "query": "topic:python language:python stars:>200 archived:false",
+  "limit": 8,
+  "output_dir": "out",
+  "min_score": 45,
+  "issue_labels": [
+    "good first issue",
+    "help wanted"
+  ],
+  "max_open_issues_per_repo": 5,
+  "max_comments_per_issue": 10,
+  "allow_missing_contributing": false,
+  "require_recent_activity_days": 120,
+  "log_dir": "out/logs"
+}
